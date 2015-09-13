@@ -1,0 +1,55 @@
+<html>
+<head>
+   <script src="jquery-2.1.4.min.js"></script>
+<script>
+
+var doIt = function() {
+
+var v = {};
+v.xajax = "InsertData";
+v.xajaxr = new Date().getTime();
+
+var req = JSON.stringify(v);
+var url = 'http://www.kartodromogranjaviana.com.br/live_timing/livetiming.php?xajax=InsertData&xajaxr=' + v.xajaxr;
+
+$.ajax({
+    url : url,
+	type : "POST",
+	/*headers : {
+		//"Method" : "POST " + url + " HTTP/1.1",
+		"Content-Type" : "application/x-www-form-urlencoded",
+		"Access-Control-Allow-Origin" : '*'
+	},*/
+    data : req,
+    cache : false,
+    //contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+    //processData : false,
+    type : 'POST',
+	crossDomain: true,
+	dataType: 'jsonp',
+	//accepts : 'xml',
+    success : function(data){
+        alert(JSON.stringify(data));
+    },
+	error: function(error) {
+	  alert(JSON.stringify(error));
+	}
+});
+
+/*
+        r.setRequestHeader("Method", "POST " + uri + " HTTP/1.1");
+        r.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+*/
+
+}
+</script>
+</head>
+<body>
+<form type="POST" action="http://www.kartodromogranjaviana.com.br/live_timing/livetiming.php" target="1"  enctype="application/x-www-form-urlencoded">
+  <input type="text" value="InsertData" name="xajax" />
+  <input type="text" value="whatever" name="xajaxr" />
+  <input type="button" value="Vai!" text="Vai!" onclick="javascript:doIt()" />
+</form>
+</body>
+</html>
