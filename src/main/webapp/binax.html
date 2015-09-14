@@ -12,22 +12,27 @@ v.xajaxr = new Date().getTime();
 var req = JSON.stringify(v);
 var url = 'http://www.kartodromogranjaviana.com.br/live_timing/livetiming.php?xajax=InsertData&xajaxr=' + v.xajaxr;
 
+var setHeader = function(xhr) {
+	//xhr.setRequestHeader('Content-Type' , 'application/x-www-form-urlencoded');
+    //xhr.setRequestHeader('Access-Control-Allow-Origin' , '*');
+};
+
 $.ajax({
     url : url,
 	type : "POST",
-	/*headers : {
+	headers : {
 		//"Method" : "POST " + url + " HTTP/1.1",
-		"Content-Type" : "application/x-www-form-urlencoded",
-		"Access-Control-Allow-Origin" : '*'
-	},*/
+		"custom-tenorio" : "whatever",
+		'Access-Control-Allow-Origin' : '*'
+	},
     data : req,
     cache : false,
-    //contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
+    contentType : 'application/x-www-form-urlencoded',
     //processData : false,
-    type : 'POST',
 	crossDomain: true,
 	dataType: 'jsonp',
 	//accepts : 'xml',
+	beforeSend : setHeader,
     success : function(data){
         alert(JSON.stringify(data));
     },
